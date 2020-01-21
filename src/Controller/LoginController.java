@@ -1,5 +1,6 @@
 package Controller;
 
+import Utility.ViewManager;
 import javafx.event.ActionEvent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -13,5 +14,6 @@ public class LoginController {
     }
 
     public void goToRegistrationPage(MouseEvent mouseEvent) {
+        ViewManager.changeScene(ViewManager.Window.REGISTRATION);
     }
 }
