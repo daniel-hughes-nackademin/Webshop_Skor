@@ -259,6 +259,7 @@ CREATE TABLE Recension (
     FOREIGN KEY (sko_id) REFERENCES Sko (sko_id) ON DELETE SET NULL,
     FOREIGN KEY (betyg_id) REFERENCES Betyg (betyg_id) ON DELETE SET NULL
 );
+
 INSERT INTO Recension VALUES (1, 1, 1, 3, "Helt ok sandaler men inget speciellt");
 INSERT INTO Recension VALUES (2, 2, 17, 1, "Bästa sneakers jag någonsin haft!");
 INSERT INTO Recension VALUES (3, 1, 10, 2, "Älskar den röda färgen men sulan blir dock ibland lite obekväm");
