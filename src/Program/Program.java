@@ -1,5 +1,6 @@
 package Program;
 
+import Utility.DatabaseManager;
 import Utility.ViewManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +12,8 @@ public class Program extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        DatabaseManager databaseManager = new DatabaseManager();
+        databaseManager.connect();
         Parent root = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
         primaryStage.setTitle("Fancy Shoes For Fancy Dudes");
         primaryStage.setScene(new Scene(root));
