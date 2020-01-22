@@ -25,7 +25,8 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="46aa62d2-0720-4b91-9fb8-38d294c8ae4e">
-        <schema name="webshop_skor" object-types="column, table, function" />
+        <schema name="mysql" object-types="table, function" />
+        <schema name="webshop_skor" object-types="table, column, function" />
       </connection>
     </loaded-nodes>
   </component>
@@ -48,6 +49,7 @@
   </component>
   <component name="DBNavigator.Project.FileConnectionMappingManager">
     <mapping file-url="file://$PROJECT_DIR$/src/SQL_Files/sko-webshopdatabas.sql" connection-id="46aa62d2-0720-4b91-9fb8-38d294c8ae4e" session-id="MAIN" current-schema="webshop_skor" />
+    <mapping file-url="file://$PROJECT_DIR$/src/SQL_Files/sko-webshop SP.sql" connection-id="46aa62d2-0720-4b91-9fb8-38d294c8ae4e" session-id="MAIN" current-schema="mysql" />
   </component>
   <component name="DBNavigator.Project.MethodExecutionManager">
     <method-browser />
