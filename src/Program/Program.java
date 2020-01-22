@@ -14,6 +14,7 @@ public class Program extends Application {
     public void start(Stage primaryStage) throws Exception{
         DatabaseManager databaseManager = new DatabaseManager();
         databaseManager.connect();
+        databaseManager.disconnect();
         Parent root = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
         primaryStage.setTitle("Fancy Shoes For Fancy Dudes");
         primaryStage.setScene(new Scene(root));

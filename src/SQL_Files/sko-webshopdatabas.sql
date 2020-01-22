@@ -272,3 +272,12 @@ INSERT INTO review VALUES (3, 1, 10, 4, "Älskar den röda färgen men sulan bli
 INSERT INTO review VALUES (4, 3, 21, 1, "Helt värdelöst! Alldeles för dyrt för den skiten");
 INSERT INTO review VALUES (5, 4, 1, 4, "Väldigt sköna för att vara billiga sandaler. Rekommenderar varmt");
 INSERT INTO review VALUES (6, 7, 1, 3, "Jag har inte provat dem men de verkar ju sådär");
+
+
+CREATE TABLE shoes_out_of_stock_log (
+	id int NOT NULL AUTO_INCREMENT,
+	shoe_id int NOT NULL,
+	out_of_stock_date DATE NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (shoe_id) REFERENCES shoe(shoe_id) ON DELETE CASCADE
+);
