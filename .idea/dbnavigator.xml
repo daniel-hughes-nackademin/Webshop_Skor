@@ -25,7 +25,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="46aa62d2-0720-4b91-9fb8-38d294c8ae4e">
-        <schema name="webshop_skor" object-types="table, function" />
+        <schema name="webshop_skor" object-types="column, table, function" />
       </connection>
     </loaded-nodes>
   </component>
