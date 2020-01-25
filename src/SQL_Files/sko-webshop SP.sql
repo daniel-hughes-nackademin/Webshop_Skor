@@ -73,3 +73,37 @@ COMMIT;
 END //
 
 DELIMITER ;
+
+
+
+DROP PROCEDURE IF EXISTS attempt_login;
+
+DELIMITER //
+CREATE PROCEDURE attempt_login(input_email VARCHAR(50), input_password VARCHAR(50))
+BEGIN
+DECLARE cust_id int;
+
+-- No exception handler because no rollback is needed and sql exception stack trace is desired
+
+-- Store customer id
+SELECT customer_id
+    INTO cust_id
+    FROM customer
+    WHERE email = input_email AND password = input_password;
+
+IF NOT (customer_exists(cust_id)) THEN
+    SELECT 'Email or password is incorrect' AS ERROR;
+ELSE
+    SELECT
+        c.customer_id,
+        c.first_name,
+        c.last_name,
+        c.email,
+        cy.city
+        FROM customer c
+        JOIN city cy USING (city_id);
+END IF;
+
+END //
+
+DELIMITER ;

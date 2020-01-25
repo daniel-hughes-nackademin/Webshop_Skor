@@ -259,6 +259,7 @@ CREATE TABLE review (
     shoe_id int,
     rating_id int,
     comment varchar(100),
+    review_date Date CHECK (review_date <= CURRENT_DATE()),
     PRIMARY KEY (review_id),
     FOREIGN KEY (customer_id) REFERENCES customer (customer_id) ON DELETE SET NULL,
     FOREIGN KEY (shoe_id) REFERENCES shoe (shoe_id) ON DELETE SET NULL,

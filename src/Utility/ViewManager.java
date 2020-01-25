@@ -11,19 +11,19 @@ public class ViewManager {
 
     public static Stage stage;
 
-    public enum Window {
+    public enum View {
         LOGIN,
         SHOP,
         REGISTRATION
     }
 
 
-    public static void changeScene(Window window){
+    public static void changeScene(View view){
 
         String fxmlName;
 
 
-        switch (window){
+        switch (view){
 
             case LOGIN:
                 fxmlName = "Login";
@@ -35,7 +35,7 @@ public class ViewManager {
                 fxmlName = "Registration";
                 break;
             default:
-                throw new IllegalStateException("Unexpected value: " + window);
+                throw new IllegalStateException("Unexpected value: " + view);
         }
 
         try {
