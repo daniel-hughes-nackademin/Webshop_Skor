@@ -9,6 +9,7 @@ DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
 		ROLLBACK;
 		SELECT('SQLEXCEPTION, changes not saved') AS ERROR;
+		RESIGNAL;
     END;
 
 
@@ -18,7 +19,7 @@ IF NOT shoe_exists(input_shoe_id) THEN
 ELSEIF NOT customer_exists(input_customer_id) THEN
 	SELECT 'Customer not found in database' AS ERROR;
 ELSE -- customer and shoe IDs are in the database
-	
+
 	IF NOT order_exists(input_order_id) THEN
 		INSERT INTO orders (customer_id, order_date) VALUES (input_customer_id, CURRENT_DATE());
         INSERT INTO order_item (order_id, shoe_id, quantity) VALUES(LAST_INSERT_ID(), input_shoe_id, 1);
@@ -31,13 +32,14 @@ ELSE -- customer and shoe IDs are in the database
 			INSERT INTO order_item (order_id, shoe_id, quantity) VALUES(input_order_id, input_shoe_id, 1);
         END IF;
 	END IF;
+
+
+    -- Stock quantity decreases by 1 since order item quantity increases by 1
+    UPDATE shoe
+    SET stock_quantity = stock_quantity - 1
+    WHERE shoe_id = input_shoe_id;
+
 END IF;
-
--- Stock quantity decreases by 1 since order item quantity increases by 1
-UPDATE shoe
-SET stock_quantity = stock_quantity - 1
-WHERE shoe_id = input_shoe_id;
-
 COMMIT;
 
 END //
@@ -53,7 +55,7 @@ BEGIN
 DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
 		ROLLBACK;
-		SELECT('SQLEXCEPTION, changes not saved') AS ERROR;
+		RESIGNAL;
     END;
 
 
@@ -83,7 +85,7 @@ CREATE PROCEDURE attempt_login(input_email VARCHAR(50), input_password VARCHAR(5
 BEGIN
 DECLARE cust_id int;
 
--- No exception handler because no rollback is needed and sql exception stack trace is desired
+-- No exception handler because no rollback is needed for select statement and sql exception stack trace is desired
 
 -- Store customer id
 SELECT customer_id

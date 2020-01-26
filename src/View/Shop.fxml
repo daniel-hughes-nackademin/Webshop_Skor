@@ -7,24 +7,27 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="623.0" prefWidth="1003.0" xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ShopController">
-    <TableView layoutX="51.0" layoutY="91.0" prefHeight="405.0" prefWidth="899.0">
+<AnchorPane prefHeight="623.0" prefWidth="1003.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ShopController">
+    <TableView fx:id="shoeDisplay" layoutX="43.0" layoutY="91.0" prefHeight="405.0" prefWidth="899.0">
       <columns>
-          <TableColumn prefWidth="75.0" text="C1"/>
-          <TableColumn prefWidth="75.0" text="C2"/>
-          <TableColumn prefWidth="88.0" text="Column X"/>
+          <TableColumn fx:id="colBrand" prefWidth="128.0" text="Brand" />
+          <TableColumn fx:id="colModel" prefWidth="204.0" text="Model" />
+         <TableColumn fx:id="colColor" minWidth="0.0" prefWidth="82.0" text="Color" />
+          <TableColumn fx:id="colEU" prefWidth="36.0" text="EU" />
+         <TableColumn fx:id="colUK" prefWidth="43.0" text="UK" />
+         <TableColumn fx:id="colUSM" prefWidth="64.0" text="US Male" />
+         <TableColumn fx:id="colUSF" prefWidth="67.0" text="US Female" />
+         <TableColumn fx:id="colJP" prefWidth="53.0" text="JP" />
+         <TableColumn fx:id="colPrice" prefWidth="67.0" text="Price (SEK)" />
+         <TableColumn fx:id="colAction" prefWidth="87.0" text="Action" />
+         <TableColumn fx:id="colStock" prefWidth="67.0" text="In Stock" />
       </columns>
     </TableView>
-    <Label layoutX="43.0" layoutY="33.0" prefHeight="17.0" prefWidth="77.0" text="Logged in as:"/>
-    <Label fx:id="customerNameLabel" layoutX="120.0" layoutY="27.0" prefHeight="29.0" prefWidth="154.0"
-           text="FirstName LastName">
+    <Label layoutX="43.0" layoutY="33.0" prefHeight="17.0" prefWidth="77.0" text="Logged in as:" />
+    <Label fx:id="customerNameLabel" layoutX="120.0" layoutY="27.0" prefHeight="29.0" prefWidth="154.0" text="FirstName LastName">
         <font>
-          <Font size="16.0"/>
+          <Font size="16.0" />
         </font>
     </Label>
-    <Button layoutX="43.0" layoutY="56.0" mnemonicParsing="false" onAction="#goToProfileSettings" prefHeight="25.0"
-            prefWidth="104.0" style="-fx-background-color: #EA0077;" text="Profile Settings" textFill="#0b0180"/>
-    <Button layoutX="51.0" layoutY="513.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Button"/>
+    <Button layoutX="43.0" layoutY="56.0" mnemonicParsing="false" onAction="#goToProfileSettings" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: #EA0077;" text="Profile Settings" textFill="#0b0180" />
 </AnchorPane>

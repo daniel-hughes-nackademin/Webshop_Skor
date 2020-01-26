@@ -212,7 +212,7 @@ CREATE TABLE order_item (
     -- order_item_id int NOT NULL AUTO_INCREMENT,
     order_id int NOT NULL,
     shoe_id int NOT NULL,
-    quantity int NOT NULL DEFAULT 1 CHECK (quantity >= 1),
+    quantity int NOT NULL CHECK (quantity >= 1),
     PRIMARY KEY (order_id, shoe_id),
     FOREIGN KEY (order_id) REFERENCES orders (order_id) ON DELETE CASCADE,
     FOREIGN KEY (shoe_id) REFERENCES shoe (shoe_id) ON DELETE CASCADE
@@ -259,6 +259,7 @@ CREATE TABLE review (
     shoe_id int,
     rating_id int,
     comment varchar(100),
+    review_date Date CHECK (review_date <= CURRENT_DATE()),
     PRIMARY KEY (review_id),
     FOREIGN KEY (customer_id) REFERENCES customer (customer_id) ON DELETE SET NULL,
     FOREIGN KEY (shoe_id) REFERENCES shoe (shoe_id) ON DELETE SET NULL,

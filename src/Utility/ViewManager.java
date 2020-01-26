@@ -14,7 +14,8 @@ public class ViewManager {
     public enum View {
         LOGIN,
         SHOP,
-        REGISTRATION
+        REGISTRATION,
+        PROFILE
     }
 
 
@@ -33,6 +34,9 @@ public class ViewManager {
                 break;
             case REGISTRATION:
                 fxmlName = "Registration";
+                break;
+            case PROFILE:
+                fxmlName = "Profile";
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + view);
