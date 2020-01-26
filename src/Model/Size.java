@@ -1,14 +1,14 @@
 package Model;
 
 public class Size {
-    String eu;
-    String uk;
-    String usMale;
-    String usFemale;
-    String japan;
+    private int eu;
+    private double uk;
+    private double usMale;
+    private double usFemale;
+    private double japan;
 
 
-    public Size(String eu, String uk, String usMale, String usFemale, String japan) {
+    public Size(int eu, double uk, double usMale, double usFemale, double japan) {
         this.eu = eu;
         this.uk = uk;
         this.usMale = usMale;
@@ -16,23 +16,23 @@ public class Size {
         this.japan = japan;
     }
 
-    public String getEu() {
+    public int getEu() {
         return eu;
     }
 
-    public String getUsMale() {
+    public double getUsMale() {
         return usMale;
     }
 
-    public String getUsFemale() {
+    public double getUsFemale() {
         return usFemale;
     }
 
-    public String getUk() {
+    public double getUk() {
         return uk;
     }
 
-    public String getJapan() {
+    public double getJapan() {
         return japan;
     }
 }

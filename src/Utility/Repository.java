@@ -131,11 +131,11 @@ public class Repository {
                 Brand brand = new Brand(resultSet.getString("brand"));
 
                 Size size = new Size(
-                        resultSet.getString("eu"),
-                        resultSet.getString("uk"),
-                        resultSet.getString("usa_male"),
-                        resultSet.getString("usa_female"),
-                        resultSet.getString("japan")
+                        resultSet.getInt("eu"),
+                        resultSet.getDouble("uk"),
+                        resultSet.getDouble("usa_male"),
+                        resultSet.getDouble("usa_female"),
+                        resultSet.getDouble("japan")
                 );
 
                 String color = resultSet.getString("color");

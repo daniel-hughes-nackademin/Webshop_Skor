@@ -2,12 +2,12 @@ package Model;
 
 public class Shoe {
 
-    Model model;
-    Size size;
-    Brand brand;
-    int price;
-    String color;
-    int stockQuantity;
+    private Model model;
+    private Size size;
+    private Brand brand;
+    private int price;
+    private String color;
+    private int stockQuantity;
 
 
     public Shoe(Model model, Size size, Brand brand, int price, String color, int stockQuantity) {
@@ -70,6 +70,6 @@ public class Shoe {
 
     @Override
     public String toString() {
-        return model.getModel() + ", " + brand.getBrand() + ", storlek " + size.getEu() + ", " + price + " kr, " + color + " färg, i lager: " + stockQuantity;
+        return model.getModel() + ", " + brand.getBrand() + ", storlek " + size.getEu() + "/" + size.getJapan() + ", " + price + " kr, " + color + " färg, i lager: " + stockQuantity;
     }
 }

@@ -4,24 +4,28 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="623.0" prefWidth="1003.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ShopController">
-    <TableView fx:id="shoeDisplay" layoutX="43.0" layoutY="91.0" prefHeight="405.0" prefWidth="899.0">
+    <TableView fx:id="shoeDisplay" layoutX="43.0" layoutY="91.0" prefHeight="405.0" prefWidth="927.0">
       <columns>
-          <TableColumn fx:id="colBrand" prefWidth="128.0" text="Brand" />
-          <TableColumn fx:id="colModel" prefWidth="204.0" text="Model" />
-         <TableColumn fx:id="colColor" minWidth="0.0" prefWidth="82.0" text="Color" />
-          <TableColumn fx:id="colEU" prefWidth="36.0" text="EU" />
-         <TableColumn fx:id="colUK" prefWidth="43.0" text="UK" />
-         <TableColumn fx:id="colUSM" prefWidth="64.0" text="US Male" />
-         <TableColumn fx:id="colUSF" prefWidth="67.0" text="US Female" />
-         <TableColumn fx:id="colJP" prefWidth="53.0" text="JP" />
-         <TableColumn fx:id="colPrice" prefWidth="67.0" text="Price (SEK)" />
-         <TableColumn fx:id="colAction" prefWidth="87.0" text="Action" />
-         <TableColumn fx:id="colStock" prefWidth="67.0" text="In Stock" />
+          <TableColumn fx:id="colBrand" editable="false" prefWidth="128.0" resizable="false" text="Brand" />
+          <TableColumn fx:id="colModel" editable="false" prefWidth="204.0" resizable="false" text="Model" />
+         <TableColumn fx:id="colColor" editable="false" minWidth="0.0" prefWidth="82.0" resizable="false" text="Color" />
+          <TableColumn fx:id="colEU" editable="false" prefWidth="36.0" resizable="false" text="EU" />
+         <TableColumn fx:id="colUK" editable="false" prefWidth="43.0" resizable="false" text="UK" />
+         <TableColumn fx:id="colUSM" editable="false" prefWidth="64.0" resizable="false" text="US Male" />
+         <TableColumn fx:id="colUSF" editable="false" prefWidth="67.0" resizable="false" text="US Female" />
+         <TableColumn fx:id="colJP" editable="false" prefWidth="53.0" resizable="false" text="JP" />
+         <TableColumn fx:id="colPrice" editable="false" prefWidth="67.0" resizable="false" text="Price (SEK)" />
+         <TableColumn fx:id="colAction" editable="false" prefWidth="109.0" resizable="false" text="Action" />
+         <TableColumn fx:id="colStock" editable="false" prefWidth="54.0" resizable="false" text="In Stock" />
       </columns>
+      <effect>
+         <DropShadow />
+      </effect>
     </TableView>
     <Label layoutX="43.0" layoutY="33.0" prefHeight="17.0" prefWidth="77.0" text="Logged in as:" />
     <Label fx:id="customerNameLabel" layoutX="120.0" layoutY="27.0" prefHeight="29.0" prefWidth="154.0" text="FirstName LastName">
