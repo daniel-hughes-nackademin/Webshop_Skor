@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 public class Program extends Application {
@@ -43,5 +44,12 @@ public class Program extends Application {
         ViewManager.changeScene(ViewManager.View.LOGIN);
     }
 
+
+    public static void viewMessage(String message, String title, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setContentText(message);
+        alert.setTitle(title);
+        alert.show();
+    }
 
 }

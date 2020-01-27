@@ -118,3 +118,49 @@ END IF;
 END //
 
 DELIMITER ;
+
+
+
+DROP PROCEDURE IF EXISTS get_specific_order;
+
+DELIMITER //
+CREATE PROCEDURE get_specific_order(input_order_id INT)
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		ROLLBACK;
+		RESIGNAL;
+    END;
+
+
+START TRANSACTION;
+
+IF NOT order_exists(input_order_id) THEN
+	SELECT 'Order does not exist in the database' AS ERROR;
+ELSE
+	SELECT
+	    s.shoe_id,
+	    b.brand,
+	    m.model,
+	    s.color,
+	    sz.eu,
+        sz.uk,
+	    sz.usa_male,
+	    sz.usa_female,
+        sz.japan,
+        s.price,
+	    s.stock_quantity,
+        oi.quantity
+	FROM order_item oi
+	JOIN shoe s USING (shoe_id)
+	JOIN brand b ON s.brand_id = b.brand_id
+	JOIN model m ON s.model_id = m.model_id
+	JOIN size sz ON s.size_id = sz.size_id
+	WHERE oi.order_id = input_order_id;
+END IF;
+
+COMMIT;
+END //
+
+DELIMITER ;

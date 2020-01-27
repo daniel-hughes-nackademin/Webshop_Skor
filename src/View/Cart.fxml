@@ -17,13 +17,10 @@
           <TableColumn fx:id="colModel" editable="false" prefWidth="204.0" resizable="false" text="Model" />
          <TableColumn fx:id="colColor" editable="false" minWidth="0.0" prefWidth="82.0" resizable="false" text="Color" />
           <TableColumn fx:id="colEU" editable="false" prefWidth="36.0" resizable="false" text="EU" />
-         <TableColumn fx:id="colUK" editable="false" prefWidth="43.0" resizable="false" text="UK" />
-         <TableColumn fx:id="colUSM" editable="false" prefWidth="64.0" resizable="false" text="US Male" />
-         <TableColumn fx:id="colUSF" editable="false" prefWidth="67.0" resizable="false" text="US Female" />
-         <TableColumn fx:id="colJP" editable="false" prefWidth="53.0" resizable="false" text="JP" />
-         <TableColumn fx:id="colPrice" editable="false" prefWidth="67.0" resizable="false" text="Price (SEK)" />
-         <TableColumn fx:id="colAmount" editable="false" prefWidth="59.0" resizable="false" text="Amount" />
-         <TableColumn fx:id="colTotal" editable="false" prefWidth="104.0" resizable="false" text="Total Price (SEK)" />
+         <TableColumn fx:id="colCategories" prefWidth="188.0" text="Categories" />
+         <TableColumn fx:id="colPrice" editable="false" prefWidth="77.0" resizable="false" text="Price (SEK)" />
+         <TableColumn fx:id="colQuantity" editable="false" prefWidth="67.0" resizable="false" text="Amount" />
+         <TableColumn fx:id="colTotal" editable="false" prefWidth="103.0" resizable="false" text="Total Price (SEK)" />
       </columns>
       <effect>
          <DropShadow />
@@ -36,10 +33,9 @@
         </font>
     </Label>
     <Button layoutX="43.0" layoutY="56.0" mnemonicParsing="false" onAction="#goToProfileSettings" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: #EA0077;" text="Profile Settings" textFill="#0b0180" />
-   <ImageView fitHeight="70.0" fitWidth="96.0" layoutX="740.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../Resources/Shopping Cart Icon.jpg" />
-      </image></ImageView>
+    <ImageView fitHeight="70.0" fitWidth="96.0" layoutX="740.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../Resources/Shopping Cart Icon.jpg" />
+    </ImageView>
    <Label fx:id="nrOfItemsInCartLabel" alignment="CENTER" layoutX="740.0" layoutY="7.0" prefHeight="25.0" prefWidth="37.0" text="0" textFill="#053683">
       <font>
          <Font size="17.0" />
@@ -60,5 +56,5 @@
          <Font size="14.0" />
       </font>
    </Label>
-   <Button layoutX="900.0" layoutY="61.0" mnemonicParsing="false" prefHeight="11.0" prefWidth="70.0" style="-fx-background-color: #EA0077;" text="Go Back" textFill="#0b0180" />
+   <Button layoutX="900.0" layoutY="61.0" mnemonicParsing="false" onAction="#goToShop" prefHeight="11.0" prefWidth="70.0" style="-fx-background-color: #EA0077;" text="Go Back" textFill="#0b0180" />
 </AnchorPane>

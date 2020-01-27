@@ -12,7 +12,7 @@ public class Shoe {
     private int price;
     private String color;
     private int stockQuantity;
-    private List<Category> categories = new ArrayList<Category>();
+    private List<Category> categories;
 
 
     public Shoe(Model model, Size size, Brand brand, int price, String color, int stockQuantity, List<Category> categories) {
@@ -77,12 +77,22 @@ public class Shoe {
         return categories;
     }
 
-    public void setCategories(List categories) {
+    public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
 
     @Override
     public String toString() {
         return model.getModel() + ", " + brand.getBrand() + ", storlek " + size.getEu() + "/" + size.getJapan() + ", " + price + " kr, " + color + " färg, i lager: " + stockQuantity;
+    }
+
+    public String getConcatenatedCategories() {
+        StringBuilder sbCategories = new StringBuilder();
+        for (int i = 0; i < categories.size() - 1; i++) {
+            sbCategories.append(this.categories.get(i)).append(", ");
+        }
+        sbCategories.append(categories.get(categories.size() - 1));
+
+        return sbCategories.toString();
     }
 }

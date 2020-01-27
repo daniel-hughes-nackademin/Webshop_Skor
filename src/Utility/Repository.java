@@ -213,7 +213,7 @@ public class Repository {
             resultSet.next();
 
             if (columnExists(resultSet, "ERROR")) {
-                ShopController.viewMessage(resultSet.getString("ERROR"), "ERROR", Alert.AlertType.WARNING);
+                Program.viewMessage(resultSet.getString("ERROR"), "ERROR", Alert.AlertType.WARNING);
             } else if (columnExists(resultSet, "current_order_id")){
                 Program.currentOrderID = resultSet.getInt(1);
             }
@@ -223,7 +223,7 @@ public class Repository {
 
             isAddedToCart = true;
         } catch (MySQLIntegrityConstraintViolationException e){
-          ShopController.viewMessage("Shoe is out of stock!", "Too bad :(", Alert.AlertType.WARNING);
+          Program.viewMessage("Shoe is out of stock!", "Too bad :(", Alert.AlertType.WARNING);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -232,5 +232,62 @@ public class Repository {
 
 
         return isAddedToCart;
+    }
+
+    public static HashMap<Integer, OrderItem> getCurrentOrderItemsFromDB() {
+        HashMap<Integer, OrderItem> cart = new HashMap<>();
+        connect();
+
+        try {
+            PreparedStatement prepStmt = connection.prepareCall("CALL get_specific_order(?)");
+            prepStmt.setInt(1, Program.currentOrderID);
+
+            ResultSet resultSet = prepStmt.executeQuery();
+            if(columnExists(resultSet, "ERROR"))
+                Program.viewMessage(resultSet.getString("ERROR"), "ERROR", Alert.AlertType.WARNING);
+            else{
+                while (resultSet.next()){
+                    int shoeId = resultSet.getInt("shoe_id");
+                    Model model = new Model(resultSet.getString("model"));
+                    Brand brand = new Brand(resultSet.getString("brand"));
+
+                    Size size = new Size(
+                            resultSet.getInt("eu"),
+                            resultSet.getDouble("uk"),
+                            resultSet.getDouble("usa_male"),
+                            resultSet.getDouble("usa_female"),
+                            resultSet.getDouble("japan")
+                    );
+
+                    String color = resultSet.getString("color");
+                    int price = resultSet.getInt("price");
+                    int stockQuantity = resultSet.getInt("stock_quantity");
+
+                    List<Category> categories = getCategoriesFromDB(shoeId);
+
+                    Shoe shoe = new Shoe(
+                            model,
+                            size,
+                            brand,
+                            price,
+                            color,
+                            stockQuantity,
+                            categories
+                    );
+
+                    OrderItem orderItem = new OrderItem(shoe, resultSet.getInt("quantity"));
+
+                    cart.put(shoeId, orderItem);
+
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        disconnect();
+
+        return cart;
     }
 }
