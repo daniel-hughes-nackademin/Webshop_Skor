@@ -2,38 +2,74 @@ package Model;
 
 public class Shoe {
 
-    private String brand;
-    private String model;
-    private String size;
-    private int stock_quantity;
+    private Model model;
+    private Size size;
+    private Brand brand;
     private int price;
+    private String color;
+    private int stockQuantity;
 
-    public Shoe(String brand, String model, String size, int stock_quantity, int price) {
-        this.brand = brand;
+
+    public Shoe(Model model, Size size, Brand brand, int price, String color, int stockQuantity) {
         this.model = model;
         this.size = size;
-        this.stock_quantity = stock_quantity;
+        this.brand = brand;
         this.price = price;
+        this.color = color;
+        this.stockQuantity = stockQuantity;
     }
 
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public String getModel() {
+    public Model getModel() {
         return model;
     }
 
-    public String getSize() {
+    public void setModel(Model model) {
+        this.model = model;
+    }
+
+    public Size getSize() {
         return size;
     }
 
-    public int getStock_quantity() {
-        return stock_quantity;
+    public void setSize(Size size) {
+        this.size = size;
+    }
+
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
     }
 
     public int getPrice() {
         return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public int getStockQuantity() {
+        return stockQuantity;
+    }
+
+    public void setStockQuantity(int stockQuantity) {
+        this.stockQuantity = stockQuantity;
+    }
+
+
+    @Override
+    public String toString() {
+        return model.getModel() + ", " + brand.getBrand() + ", storlek " + size.getEu() + "/" + size.getJapan() + ", " + price + " kr, " + color + " färg, i lager: " + stockQuantity;
     }
 }
