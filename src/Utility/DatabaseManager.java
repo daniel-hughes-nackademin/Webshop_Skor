@@ -28,8 +28,6 @@ public class DatabaseManager {
             username = prop.getProperty("username");
             password = prop.getProperty("password");
 
-            System.out.println(connectionURL);
-
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -38,6 +36,7 @@ public class DatabaseManager {
         try {
             if (connectionURL != null) {
                 connection = DriverManager.getConnection(connectionURL, username, password);
+                System.out.println("Connected at: " + connectionURL);
             }
         } catch (SQLException e) {
             e.printStackTrace();

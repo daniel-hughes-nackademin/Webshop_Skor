@@ -11,6 +11,7 @@ public class LoginController {
     public TextField usernameField;
 
     public void login(ActionEvent actionEvent) {
+        ViewManager.changeScene(ViewManager.Window.SHOP);
     }
 
     public void goToRegistrationPage(MouseEvent mouseEvent) {

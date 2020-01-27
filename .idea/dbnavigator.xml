@@ -25,8 +25,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="46aa62d2-0720-4b91-9fb8-38d294c8ae4e">
-        <schema name="mysql" object-types="table, function" />
-        <schema name="webshop_skor" object-types="table, column, function" />
+        <schema name="mysql" object-types="function, table" />
       </connection>
     </loaded-nodes>
   </component>
