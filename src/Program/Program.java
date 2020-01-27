@@ -12,11 +12,10 @@ import javafx.stage.Stage;
 
 public class Program extends Application {
 
-    public static int customerID = 0;
-    public static Customer customer = null;
-    public static int currentOrderID = 0;
-    public static Order currentOrder = null;
-    public static int nrOfItemsInCart = 0;
+    public static int customerID;
+    public static Customer customer;
+    public static int currentOrderID;
+    public static int nrOfItemsInCart;
 
 
 
@@ -38,7 +37,6 @@ public class Program extends Application {
     public static void logOut() {
         customer = null;
         customerID = 0;
-        currentOrder = null;
         currentOrderID = 0;
         nrOfItemsInCart = 0;
         ViewManager.changeScene(ViewManager.View.LOGIN);

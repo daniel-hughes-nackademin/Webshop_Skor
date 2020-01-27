@@ -65,7 +65,7 @@ public class ShopController {
 
         //Making a cell factory to insert add to cart button
         Callback<TableColumn<Shoe, String>, TableCell<Shoe, String>> cellFactory
-                = //
+                =
                 new Callback<>() {
                     @Override
                     public TableCell call(final TableColumn<Shoe, String> param) {
@@ -104,7 +104,7 @@ public class ShopController {
         shoes = Repository.getShoesFromDB();
         ObservableList<Shoe> shoeTableContentList = FXCollections.observableArrayList();
         shoes.entrySet().stream().filter(shoeEntry -> shoeEntry.getValue().getStockQuantity() > 0).forEach(shoeEntry -> shoeTableContentList.add(shoeEntry.getValue()));
-        //shoes.forEach((id, shoe) -> shoeTableContentList.add(shoe));
+
         return shoeTableContentList;
     }
 
@@ -121,9 +121,12 @@ public class ShopController {
             Program.viewMessage("Selected shoe added to cart", "Happy Shopping!", Alert.AlertType.INFORMATION);
             Program.nrOfItemsInCart++;
             nrOfItemsInCartLabel.setText(Integer.toString(Program.nrOfItemsInCart));
+
+            //Refreshes the table view
             ObservableList<Shoe> shoeTableContentList = getObservableShoeListFromDB();
             shoeDisplay.setItems(shoeTableContentList);
             shoeDisplay.refresh();
+
             System.out.println("Order ID: " + Program.currentOrderID);
         }
 
