@@ -5,6 +5,8 @@ DELIMITER //
 CREATE PROCEDURE add_to_cart(IN input_customer_id INT, IN input_order_id INT, IN input_shoe_id INT)
 BEGIN
 
+DECLARE current_order_id INT;
+
 DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
 		ROLLBACK;
@@ -22,7 +24,9 @@ ELSE -- customer and shoe IDs are in the database
 
 	IF NOT order_exists(input_order_id) THEN
 		INSERT INTO orders (customer_id, order_date) VALUES (input_customer_id, CURRENT_DATE());
-        INSERT INTO order_item (order_id, shoe_id, quantity) VALUES(LAST_INSERT_ID(), input_shoe_id, 1);
+		SET current_order_id = LAST_INSERT_ID();
+        INSERT INTO order_item (order_id, shoe_id, quantity) VALUES(current_order_id, input_shoe_id, 1);
+        SELECT current_order_id;
 	ELSE -- order exists
 		IF order_item_exists(input_order_id, input_shoe_id) THEN
 			UPDATE order_item
@@ -31,6 +35,8 @@ ELSE -- customer and shoe IDs are in the database
 		ELSE -- If order_item doesn't exist
 			INSERT INTO order_item (order_id, shoe_id, quantity) VALUES(input_order_id, input_shoe_id, 1);
         END IF;
+
+        SELECT 'Shoe added to cart' AS SUCCESS;
 	END IF;
 
 
@@ -45,6 +51,9 @@ COMMIT;
 END //
 
 DELIMITER ;
+
+
+
 
 DROP PROCEDURE IF EXISTS rate;
 

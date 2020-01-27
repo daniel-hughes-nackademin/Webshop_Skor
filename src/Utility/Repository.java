@@ -1,7 +1,10 @@
 package Utility;
 
+import Controller.ShopController;
 import Model.*;
 import Program.Program;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+import javafx.scene.control.Alert;
 
 import javax.swing.*;
 import java.io.FileInputStream;
@@ -65,6 +68,7 @@ public class Repository {
         int nrOfColumns = meta.getColumnCount();
 
         for (int i = 1; i <= nrOfColumns; i++) {
+            System.out.println("Column: " + meta.getColumnName(i));
             if (meta.getColumnName(i).equals(columnName))
                 return true; //Column name found in result set
         }
@@ -104,10 +108,10 @@ public class Repository {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error occurred when connecting to database", "Login failed", JOptionPane.WARNING_MESSAGE);
             e.printStackTrace();
+        } finally {
+            disconnect();
         }
 
-
-        disconnect();
 
         return isSuccessfulLogin;
     }
@@ -156,12 +160,48 @@ public class Repository {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            disconnect();
         }
 
-
-        disconnect();
 
         return shoes;
     }
 
+    public static boolean addToCart(int shoeId) {
+        connect();
+
+        boolean isAddedToCart = false;
+
+        try {
+            PreparedStatement prepStmt = connection.prepareCall("CALL add_to_cart(?,?,?)");
+            prepStmt.setInt(1, Program.customerID);
+            prepStmt.setInt(2, Program.currentOrderID);
+            prepStmt.setInt(3, shoeId);
+
+            ResultSet resultSet = prepStmt.executeQuery();
+
+            resultSet.next();
+
+            if (columnExists(resultSet, "ERROR")) {
+                ShopController.viewMessage(resultSet.getString("ERROR"), "ERROR", Alert.AlertType.WARNING);
+            } else if (columnExists(resultSet, "current_order_id")){
+                Program.currentOrderID = resultSet.getInt(1);
+            }
+            else {
+                System.out.println("Updated order");
+            }
+
+            isAddedToCart = true;
+        } catch (MySQLIntegrityConstraintViolationException e){
+          ShopController.viewMessage("Shoe is out of stock!", "Too bad :(", Alert.AlertType.WARNING);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            disconnect();
+        }
+
+
+        return isAddedToCart;
+    }
 }

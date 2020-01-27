@@ -3,6 +3,7 @@ package Controller;
 import Model.Shoe;
 import Program.Program;
 import Utility.Repository;
+import Utility.ViewManager;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,9 +12,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 public class ShopController {
     @FXML
@@ -43,9 +47,10 @@ public class ShopController {
     private TableColumn colAction;
     @FXML
     private TableColumn<Shoe, Integer> colStock;
+    @FXML
+    private Label nrOfItemsInCartLabel;
 
     private HashMap<Integer, Shoe> shoes;
-
 
 
 
@@ -113,15 +118,43 @@ public class ShopController {
     }
 
     private void addToCart(Shoe shoe) {
-       // Repository.addToCart(shoe);
-       Alert shoeAlert = new Alert(Alert.AlertType.INFORMATION);
-       shoeAlert.setContentText("Selected shoe: " + shoe);
-       shoeAlert.show();
+
+        int shoeId = shoes.entrySet().stream()
+                .filter(e -> e.getValue().equals(shoe))
+                .map(Map.Entry::getKey)
+                .findFirst().get();
+
+
+
+        if(Repository.addToCart(shoeId)){
+            viewMessage("Selected shoe added to cart", "Happy Shopping!", Alert.AlertType.INFORMATION);
+            Program.nrOfItemsInCart++;
+            nrOfItemsInCartLabel.setText(Integer.toString(Program.nrOfItemsInCart));
+            System.out.println("Order ID: " + Program.currentOrderID);
+        }
+
 
 
     }
 
+    public static void viewMessage(String message, String title, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setContentText(message);
+        alert.setTitle(title);
+        alert.show();
+    }
+
 
     public void goToProfileSettings(ActionEvent actionEvent) {
+        ViewManager.changeScene(ViewManager.View.PROFILE);
+    }
+
+    @FXML
+    private void goToCheckout(MouseEvent mouseEvent) {
+    }
+
+    @FXML
+    private void logOut(ActionEvent actionEvent) {
+        Program.logOut();
     }
 }
