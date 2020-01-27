@@ -151,6 +151,7 @@ public class ShopController {
 
     @FXML
     private void goToCheckout(MouseEvent mouseEvent) {
+        ViewManager.changeScene(ViewManager.View.CHECKOUT);
     }
 
     @FXML

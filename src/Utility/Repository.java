@@ -11,9 +11,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 public class Repository {
 
@@ -146,17 +144,30 @@ public class Repository {
                 int price = resultSet.getInt("price");
                 int stockQuantity = resultSet.getInt("stock_quantity");
 
+                List<Category> categories = getCategoriesFromDB(shoeId);
+
                 Shoe shoe = new Shoe(
                         model,
                         size,
                         brand,
                         price,
                         color,
-                        stockQuantity
+                        stockQuantity,
+                        categories
                 );
 
                 shoes.put(shoeId, shoe);
             }
+
+
+
+
+            shoes.forEach((id, shoe) -> {
+                System.out.println("Shoe: " + id);
+                for (int i = 0; i < shoe.getCategories().size(); i++) {
+                    System.out.println(shoe.getCategories().get(i));
+                }
+            });
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -167,6 +178,24 @@ public class Repository {
 
         return shoes;
     }
+
+
+
+    private static List<Category> getCategoriesFromDB(int shoeID) throws SQLException {
+        List<Category> categories = new ArrayList<>();
+
+        PreparedStatement prepStmt = connection.prepareStatement("SELECT * FROM shoe_categories_view WHERE shoe_id = ?");
+        prepStmt.setInt(1, shoeID);
+        ResultSet resultSet = prepStmt.executeQuery();
+
+        while(resultSet.next()){
+            categories.add(new Category(resultSet.getString("category")));
+        }
+
+        return categories;
+    }
+
+
 
     public static boolean addToCart(int shoeId) {
         connect();

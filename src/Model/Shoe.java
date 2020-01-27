@@ -1,5 +1,9 @@
 package Model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class Shoe {
 
     private Model model;
@@ -8,15 +12,17 @@ public class Shoe {
     private int price;
     private String color;
     private int stockQuantity;
+    private List<Category> categories = new ArrayList<Category>();
 
 
-    public Shoe(Model model, Size size, Brand brand, int price, String color, int stockQuantity) {
+    public Shoe(Model model, Size size, Brand brand, int price, String color, int stockQuantity, List<Category> categories) {
         this.model = model;
         this.size = size;
         this.brand = brand;
         this.price = price;
         this.color = color;
         this.stockQuantity = stockQuantity;
+        this.categories = categories;
     }
 
     public Model getModel() {
@@ -67,6 +73,13 @@ public class Shoe {
         this.stockQuantity = stockQuantity;
     }
 
+    public List getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List categories) {
+        this.categories = categories;
+    }
 
     @Override
     public String toString() {

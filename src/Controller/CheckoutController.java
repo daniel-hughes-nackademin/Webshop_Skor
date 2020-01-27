@@ -1,6 +1,9 @@
 package Controller;
 
 import Model.Shoe;
+import Program.Program;
+import Utility.ViewManager;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -41,5 +44,15 @@ public class CheckoutController {
 
     public void initialize(){
 
+    }
+
+    @FXML
+    private void goToProfileSettings(ActionEvent actionEvent) {
+        ViewManager.changeScene(ViewManager.View.PROFILE);
+    }
+
+    @FXML
+    private void logOut(ActionEvent actionEvent) {
+        Program.logOut();
     }
 }
