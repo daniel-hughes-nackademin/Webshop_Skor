@@ -140,6 +140,7 @@ IF NOT order_exists(input_order_id) THEN
 	SELECT 'Order does not exist in the database' AS ERROR;
 ELSE
 	SELECT
+	    o.order_date,
 	    s.shoe_id,
 	    b.brand,
 	    m.model,
@@ -153,6 +154,7 @@ ELSE
 	    s.stock_quantity,
         oi.quantity
 	FROM order_item oi
+	JOIN orders o USING (order_id)
 	JOIN shoe s USING (shoe_id)
 	JOIN brand b ON s.brand_id = b.brand_id
 	JOIN model m ON s.model_id = m.model_id

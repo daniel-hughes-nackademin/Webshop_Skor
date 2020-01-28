@@ -15,6 +15,7 @@ public class Program extends Application {
     public static int customerID;
     public static Customer customer;
     public static int currentOrderID;
+    public static Order currentOrder;
     public static int nrOfItemsInCart;
 
 
@@ -38,6 +39,7 @@ public class Program extends Application {
         customer = null;
         customerID = 0;
         currentOrderID = 0;
+        currentOrder = null;
         nrOfItemsInCart = 0;
         ViewManager.changeScene(ViewManager.View.LOGIN);
     }

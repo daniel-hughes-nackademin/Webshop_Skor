@@ -23,12 +23,7 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes>
-      <connection connection-id="46aa62d2-0720-4b91-9fb8-38d294c8ae4e">
-        <schema name="fancy_webshop" object-types="view, dataset trigger, column, function, table" />
-        <schema name="webshop_skor" object-types="function, table" />
-      </connection>
-    </loaded-nodes>
+    <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="46aa62d2-0720-4b91-9fb8-38d294c8ae4e">

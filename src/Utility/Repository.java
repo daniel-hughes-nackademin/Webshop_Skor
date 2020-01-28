@@ -11,6 +11,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.*;
 
 public class Repository {
@@ -234,8 +236,9 @@ public class Repository {
         return isAddedToCart;
     }
 
-    public static HashMap<Integer, OrderItem> getCurrentOrderItemsFromDB() {
-        HashMap<Integer, OrderItem> cart = new HashMap<>();
+    public static Order getCurrentOrderFromDB() {
+        HashMap<Integer, OrderItem> orderItems = new HashMap<>();
+        Date orderDate = null;
         connect();
 
         try {
@@ -247,6 +250,7 @@ public class Repository {
                 Program.viewMessage(resultSet.getString("ERROR"), "ERROR", Alert.AlertType.WARNING);
             else{
                 while (resultSet.next()){
+                    orderDate = resultSet.getDate("order_date");
                     int shoeId = resultSet.getInt("shoe_id");
                     Model model = new Model(resultSet.getString("model"));
                     Brand brand = new Brand(resultSet.getString("brand"));
@@ -277,17 +281,19 @@ public class Repository {
 
                     OrderItem orderItem = new OrderItem(shoe, resultSet.getInt("quantity"));
 
-                    cart.put(shoeId, orderItem);
+                    orderItems.put(shoeId, orderItem);
+
+
 
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            disconnect();
         }
 
 
-        disconnect();
-
-        return cart;
+        return new Order(orderDate, orderItems);
     }
 }

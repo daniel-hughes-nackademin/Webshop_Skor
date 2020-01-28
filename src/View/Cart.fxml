@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="593.0" prefWidth="990.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CheckoutController">
+<AnchorPane prefHeight="593.0" prefWidth="990.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CartController">
     <ImageView fitHeight="136.0" fitWidth="135.0" layoutX="865.0" layoutY="476.0" pickOnBounds="true"
                preserveRatio="true">
         <Image url="@../Resources/Free Shipping Logo.jpg"/>

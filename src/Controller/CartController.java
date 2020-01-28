@@ -10,19 +10,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.print.PageLayout;
-import javafx.print.Paper;
 import javafx.print.PrinterJob;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
-import java.util.HashMap;
-import java.util.List;
-
-public class CheckoutController {
+public class CartController {
     @FXML
     private Label customerNameLabel;
-
     @FXML
     private TableView<OrderItem> shoeDisplay;
     @FXML
@@ -43,8 +37,6 @@ public class CheckoutController {
     private TableColumn<OrderItem, Integer> colTotal;
     @FXML
     private Label nrOfItemsInCartLabel;
-
-    private HashMap<Integer, OrderItem> cart;
     @FXML
     private Label totalPriceLabel;
 
@@ -79,9 +71,9 @@ public class CheckoutController {
     }
 
     private ObservableList<OrderItem> getOrderItemsAsObservableListFromDB() {
-        cart = Repository.getCurrentOrderItemsFromDB();
+        Program.currentOrder = Repository.getCurrentOrderFromDB();
         ObservableList<OrderItem> cartContentList = FXCollections.observableArrayList();
-        cart.forEach((shoeId, orderItem) -> cartContentList.add(orderItem));
+        Program.currentOrder.getOrderItems().forEach((shoe_id, orderItem) -> cartContentList.add(orderItem));
         return cartContentList;
     }
 
