@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="623.0" prefWidth="1003.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ShopController">
+<AnchorPane prefHeight="623.0" prefWidth="1003.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CheckoutController">
     <TableView fx:id="shoeDisplay" layoutX="43.0" layoutY="91.0" prefHeight="405.0" prefWidth="927.0">
       <columns>
           <TableColumn fx:id="colBrand" editable="false" prefWidth="128.0" resizable="false" text="Brand" />
@@ -22,8 +22,8 @@
          <TableColumn fx:id="colUSF" editable="false" prefWidth="67.0" resizable="false" text="US Female" />
          <TableColumn fx:id="colJP" editable="false" prefWidth="53.0" resizable="false" text="JP" />
          <TableColumn fx:id="colPrice" editable="false" prefWidth="67.0" resizable="false" text="Price (SEK)" />
-         <TableColumn fx:id="colAction" editable="false" prefWidth="109.0" resizable="false" text="Action" />
-         <TableColumn fx:id="colStock" editable="false" prefWidth="54.0" resizable="false" text="In Stock" />
+         <TableColumn fx:id="colAmount" editable="false" prefWidth="59.0" resizable="false" text="Amount" />
+         <TableColumn fx:id="colTotal" editable="false" prefWidth="104.0" resizable="false" text="Total Price (SEK)" />
       </columns>
       <effect>
          <DropShadow />
@@ -36,7 +36,7 @@
         </font>
     </Label>
     <Button layoutX="43.0" layoutY="56.0" mnemonicParsing="false" onAction="#goToProfileSettings" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: #EA0077;" text="Profile Settings" textFill="#0b0180" />
-   <ImageView fitHeight="70.0" fitWidth="96.0" layoutX="740.0" layoutY="26.0" onMouseClicked="#goToCheckout" pickOnBounds="true" preserveRatio="true">
+   <ImageView fitHeight="70.0" fitWidth="96.0" layoutX="740.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@../Resources/Shopping Cart Icon.jpg" />
       </image></ImageView>
@@ -44,10 +44,21 @@
       <font>
          <Font size="17.0" />
       </font></Label>
-   <Label layoutX="846.0" layoutY="42.0" onMouseClicked="#goToCheckout" prefHeight="17.0" prefWidth="115.0" text="Checkout" textFill="#0e11a4" underline="true">
+   <Label layoutX="842.0" layoutY="32.0" prefHeight="20.0" prefWidth="45.0" text="Total: ">
       <font>
          <Font size="14.0" />
       </font>
    </Label>
    <Button layoutX="155.0" layoutY="56.0" mnemonicParsing="false" onAction="#logOut" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: #EA0077;" text="Log Out" textFill="#0b0180" />
+   <Label fx:id="totalPriceLabel" alignment="CENTER_RIGHT" layoutX="875.0" layoutY="32.0" prefHeight="20.0" prefWidth="62.0" text="0">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </Label>
+   <Label layoutX="944.0" layoutY="32.0" prefHeight="20.0" prefWidth="45.0" text="SEK">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </Label>
+   <Button layoutX="900.0" layoutY="61.0" mnemonicParsing="false" prefHeight="11.0" prefWidth="70.0" style="-fx-background-color: #EA0077;" text="Go Back" textFill="#0b0180" />
 </AnchorPane>

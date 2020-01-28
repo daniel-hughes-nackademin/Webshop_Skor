@@ -1,3 +1,5 @@
+USE fancy_webshop;
+
 DROP TRIGGER IF EXISTS update_out_of_stock_log_table;
 
 DELIMITER $$

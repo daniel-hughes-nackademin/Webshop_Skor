@@ -5,6 +5,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -35,6 +36,18 @@
         </font>
     </Label>
     <Button layoutX="43.0" layoutY="56.0" mnemonicParsing="false" onAction="#goToProfileSettings" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: #EA0077;" text="Profile Settings" textFill="#0b0180" />
-   <ImageView fitHeight="49.0" fitWidth="49.0" layoutX="776.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" />
-   <Label layoutX="851.0" layoutY="48.0" text="V" />
+   <ImageView fitHeight="70.0" fitWidth="96.0" layoutX="740.0" layoutY="26.0" onMouseClicked="#goToCheckout" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../Resources/Shopping Cart Icon.jpg" />
+      </image></ImageView>
+   <Label fx:id="nrOfItemsInCartLabel" alignment="CENTER" layoutX="740.0" layoutY="7.0" prefHeight="25.0" prefWidth="37.0" text="0" textFill="#053683">
+      <font>
+         <Font size="17.0" />
+      </font></Label>
+   <Label layoutX="846.0" layoutY="42.0" onMouseClicked="#goToCheckout" prefHeight="17.0" prefWidth="115.0" text="Checkout" textFill="#0e11a4" underline="true">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </Label>
+   <Button layoutX="155.0" layoutY="56.0" mnemonicParsing="false" onAction="#logOut" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: #EA0077;" text="Log Out" textFill="#0b0180" />
 </AnchorPane>

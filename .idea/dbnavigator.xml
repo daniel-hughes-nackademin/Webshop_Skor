@@ -25,7 +25,8 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="46aa62d2-0720-4b91-9fb8-38d294c8ae4e">
-        <schema name="fancy_webshop" object-types="view, table, column, function" />
+        <schema name="fancy_webshop" object-types="view, dataset trigger, column, function, table" />
+        <schema name="webshop_skor" object-types="function, table" />
       </connection>
     </loaded-nodes>
   </component>
@@ -47,6 +48,7 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.FileConnectionMappingManager">
+    <mapping file-url="file://$PROJECT_DIR$/src/SQL_Files/sko-webshop Triggers.sql" connection-id="46aa62d2-0720-4b91-9fb8-38d294c8ae4e" session-id="MAIN" current-schema="fancy_webshop" />
     <mapping file-url="file://$PROJECT_DIR$/src/SQL_Files/sko-webshopdatabas.sql" connection-id="46aa62d2-0720-4b91-9fb8-38d294c8ae4e" session-id="MAIN" current-schema="webshop_skor" />
     <mapping file-url="file://$PROJECT_DIR$/src/SQL_Files/sko-webshop SP.sql" connection-id="46aa62d2-0720-4b91-9fb8-38d294c8ae4e" session-id="MAIN" current-schema="fancy_webshop" />
   </component>

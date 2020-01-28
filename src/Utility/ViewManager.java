@@ -15,7 +15,8 @@ public class ViewManager {
         LOGIN,
         SHOP,
         REGISTRATION,
-        PROFILE
+        PROFILE,
+        CHECKOUT
     }
 
 
@@ -37,6 +38,9 @@ public class ViewManager {
                 break;
             case PROFILE:
                 fxmlName = "Profile";
+                break;
+            case CHECKOUT:
+                fxmlName = "Checkout";
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + view);

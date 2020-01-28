@@ -1,16 +1,17 @@
 package Utility;
 
+import Controller.ShopController;
 import Model.*;
 import Program.Program;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+import javafx.scene.control.Alert;
 
 import javax.swing.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 public class Repository {
 
@@ -65,6 +66,7 @@ public class Repository {
         int nrOfColumns = meta.getColumnCount();
 
         for (int i = 1; i <= nrOfColumns; i++) {
+            System.out.println("Column: " + meta.getColumnName(i));
             if (meta.getColumnName(i).equals(columnName))
                 return true; //Column name found in result set
         }
@@ -104,10 +106,10 @@ public class Repository {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error occurred when connecting to database", "Login failed", JOptionPane.WARNING_MESSAGE);
             e.printStackTrace();
+        } finally {
+            disconnect();
         }
 
-
-        disconnect();
 
         return isSuccessfulLogin;
     }
@@ -142,26 +144,93 @@ public class Repository {
                 int price = resultSet.getInt("price");
                 int stockQuantity = resultSet.getInt("stock_quantity");
 
+                List<Category> categories = getCategoriesFromDB(shoeId);
+
                 Shoe shoe = new Shoe(
                         model,
                         size,
                         brand,
                         price,
                         color,
-                        stockQuantity
+                        stockQuantity,
+                        categories
                 );
 
                 shoes.put(shoeId, shoe);
             }
 
+
+
+
+            shoes.forEach((id, shoe) -> {
+                System.out.println("Shoe: " + id);
+                for (int i = 0; i < shoe.getCategories().size(); i++) {
+                    System.out.println(shoe.getCategories().get(i));
+                }
+            });
+
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            disconnect();
         }
 
-
-        disconnect();
 
         return shoes;
     }
 
+
+
+    private static List<Category> getCategoriesFromDB(int shoeID) throws SQLException {
+        List<Category> categories = new ArrayList<>();
+
+        PreparedStatement prepStmt = connection.prepareStatement("SELECT * FROM shoe_categories_view WHERE shoe_id = ?");
+        prepStmt.setInt(1, shoeID);
+        ResultSet resultSet = prepStmt.executeQuery();
+
+        while(resultSet.next()){
+            categories.add(new Category(resultSet.getString("category")));
+        }
+
+        return categories;
+    }
+
+
+
+    public static boolean addToCart(int shoeId) {
+        connect();
+
+        boolean isAddedToCart = false;
+
+        try {
+            PreparedStatement prepStmt = connection.prepareCall("CALL add_to_cart(?,?,?)");
+            prepStmt.setInt(1, Program.customerID);
+            prepStmt.setInt(2, Program.currentOrderID);
+            prepStmt.setInt(3, shoeId);
+
+            ResultSet resultSet = prepStmt.executeQuery();
+
+            resultSet.next();
+
+            if (columnExists(resultSet, "ERROR")) {
+                ShopController.viewMessage(resultSet.getString("ERROR"), "ERROR", Alert.AlertType.WARNING);
+            } else if (columnExists(resultSet, "current_order_id")){
+                Program.currentOrderID = resultSet.getInt(1);
+            }
+            else {
+                System.out.println("Updated order");
+            }
+
+            isAddedToCart = true;
+        } catch (MySQLIntegrityConstraintViolationException e){
+          ShopController.viewMessage("Shoe is out of stock!", "Too bad :(", Alert.AlertType.WARNING);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            disconnect();
+        }
+
+
+        return isAddedToCart;
+    }
 }
