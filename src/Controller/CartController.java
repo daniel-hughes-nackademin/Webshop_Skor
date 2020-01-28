@@ -16,6 +16,8 @@ import javafx.scene.input.MouseEvent;
 
 public class CartController {
     @FXML
+    private Label dateLabel;
+    @FXML
     private Label customerNameLabel;
     @FXML
     private TableView<OrderItem> shoeDisplay;
@@ -72,6 +74,7 @@ public class CartController {
 
     private ObservableList<OrderItem> getOrderItemsAsObservableListFromDB() {
         Program.currentOrder = Repository.getCurrentOrderFromDB();
+        dateLabel.setText(Program.currentOrder.getOrderDate().toString());
         ObservableList<OrderItem> cartContentList = FXCollections.observableArrayList();
         Program.currentOrder.getOrderItems().forEach((shoe_id, orderItem) -> cartContentList.add(orderItem));
         return cartContentList;
