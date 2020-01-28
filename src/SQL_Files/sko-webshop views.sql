@@ -10,7 +10,7 @@ average_rating(s.shoe_id) AS average_rating,
 FROM shoe s
 LEFT JOIN review rw USING (shoe_id)
 LEFT JOIN rating r ON rw.rating_id = r.rating_id
-GROUP BY s.shoe_id
+GROUP BY s.shoe_id;
 
 DROP VIEW IF EXISTS shoe_view;
 

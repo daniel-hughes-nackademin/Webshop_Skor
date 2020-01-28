@@ -259,7 +259,7 @@ CREATE TABLE review (
     shoe_id int,
     rating_id int,
     comment varchar(100),
-    review_date Date CHECK (review_date <= CURRENT_DATE()),
+    review_date Date,
     PRIMARY KEY (review_id),
     FOREIGN KEY (customer_id) REFERENCES customer (customer_id) ON DELETE SET NULL,
     FOREIGN KEY (shoe_id) REFERENCES shoe (shoe_id) ON DELETE SET NULL,
@@ -267,12 +267,12 @@ CREATE TABLE review (
     UNIQUE KEY (customer_id, shoe_id)
 );
 
-INSERT INTO review VALUES (1, 1, 1, 3, "Helt ok sandaler men inget speciellt");
-INSERT INTO review VALUES (2, 2, 17, 5, "Bästa sneakers jag någonsin haft!");
-INSERT INTO review VALUES (3, 1, 10, 4, "Älskar den röda färgen men sulan blir dock ibland lite obekväm");
-INSERT INTO review VALUES (4, 3, 21, 1, "Helt värdelöst! Alldeles för dyrt för den skiten");
-INSERT INTO review VALUES (5, 4, 1, 4, "Väldigt sköna för att vara billiga sandaler. Rekommenderar varmt");
-INSERT INTO review VALUES (6, 7, 1, 3, "Jag har inte provat dem men de verkar ju sådär");
+INSERT INTO review VALUES (1, 1, 1, 3, "Helt ok sandaler men inget speciellt", '2019-08-01');
+INSERT INTO review VALUES (2, 2, 17, 5, "Bästa sneakers jag någonsin haft!", '2019-07-15');
+INSERT INTO review VALUES (3, 1, 10, 4, "Älskar den röda färgen men sulan blir dock ibland lite obekväm", '2019-12-18');
+INSERT INTO review VALUES (4, 3, 21, 1, "Helt värdelöst! Alldeles för dyrt för den skiten", '2019-11-11');
+INSERT INTO review VALUES (5, 4, 1, 4, "Väldigt sköna för att vara billiga sandaler. Rekommenderar varmt", '2019-06-13');
+INSERT INTO review VALUES (6, 7, 1, 3, "Jag har inte provat dem men de verkar ju sådär", '2020-01-08');
 
 
 CREATE TABLE shoes_out_of_stock_log (

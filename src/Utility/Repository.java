@@ -1,9 +1,7 @@
 package Utility;
 
-import Controller.ShopController;
 import Model.*;
 import Program.Program;
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import javafx.scene.control.Alert;
 
 import javax.swing.*;
@@ -12,7 +10,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.*;
 
 public class Repository {
@@ -93,7 +90,7 @@ public class Repository {
             resultSet.next();
 
             if (columnExists(resultSet, "ERROR"))
-                JOptionPane.showMessageDialog(null, resultSet.getString("ERROR"), "Login failed", JOptionPane.WARNING_MESSAGE);
+                Program.viewMessage(resultSet.getString("ERROR"), "Login failed", Alert.AlertType.WARNING);
             else {
                 Program.customerID = resultSet.getInt("id");
                 String firstName = resultSet.getString("first");
@@ -224,8 +221,6 @@ public class Repository {
             }
 
             isAddedToCart = true;
-        } catch (MySQLIntegrityConstraintViolationException e){
-          Program.viewMessage("Shoe is out of stock!", "Too bad :(", Alert.AlertType.WARNING);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
