@@ -10,7 +10,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.print.PageLayout;
+import javafx.print.Paper;
+import javafx.print.PrinterJob;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 
 import java.util.HashMap;
 import java.util.List;
@@ -95,5 +99,15 @@ public class CheckoutController {
     @FXML
     private void goToShop(ActionEvent actionEvent) {
         ViewManager.changeScene(ViewManager.View.SHOP);
+    }
+
+    @FXML
+    private void openPrinterDialog(MouseEvent mouseEvent) {
+        PrinterJob job = PrinterJob.createPrinterJob();
+        if(job != null){
+            job.showPrintDialog(ViewManager.stage); // Window must be your main Stage
+            job.printPage(shoeDisplay);
+            job.endJob();
+        }
     }
 }

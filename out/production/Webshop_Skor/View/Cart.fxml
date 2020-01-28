@@ -10,17 +10,23 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="623.0" prefWidth="1003.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CheckoutController">
+<AnchorPane prefHeight="593.0" prefWidth="990.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CheckoutController">
+    <ImageView fitHeight="136.0" fitWidth="135.0" layoutX="865.0" layoutY="476.0" pickOnBounds="true"
+               preserveRatio="true">
+        <Image url="@../Resources/Free Shipping Logo.jpg"/>
+    </ImageView>
     <TableView fx:id="shoeDisplay" layoutX="43.0" layoutY="91.0" prefHeight="405.0" prefWidth="927.0">
       <columns>
-          <TableColumn fx:id="colBrand" editable="false" prefWidth="128.0" resizable="false" text="Brand" />
-          <TableColumn fx:id="colModel" editable="false" prefWidth="204.0" resizable="false" text="Model" />
-         <TableColumn fx:id="colColor" editable="false" minWidth="0.0" prefWidth="82.0" resizable="false" text="Color" />
-          <TableColumn fx:id="colEU" editable="false" prefWidth="36.0" resizable="false" text="EU" />
-         <TableColumn fx:id="colCategories" prefWidth="188.0" text="Categories" />
-         <TableColumn fx:id="colPrice" editable="false" prefWidth="77.0" resizable="false" text="Price (SEK)" />
-         <TableColumn fx:id="colQuantity" editable="false" prefWidth="67.0" resizable="false" text="Amount" />
-         <TableColumn fx:id="colTotal" editable="false" prefWidth="103.0" resizable="false" text="Total Price (SEK)" />
+          <TableColumn fx:id="colBrand" editable="false" prefWidth="107.0" resizable="false" text="Brand" />
+          <TableColumn fx:id="colModel" editable="false" prefWidth="164.0" resizable="false" text="Model" />
+         <TableColumn fx:id="colColor" editable="false" minWidth="0.0" prefWidth="91.0" resizable="false" text="Color" />
+          <TableColumn fx:id="colEU" editable="false" prefWidth="35.0" resizable="false" text="EU" />
+         <TableColumn fx:id="colCategories" prefWidth="166.0" text="Categories" />
+         <TableColumn fx:id="colPrice" editable="false" prefWidth="67.0" resizable="false" text="Price (SEK)" />
+         <TableColumn fx:id="colQuantity" editable="false" prefWidth="55.0" resizable="false" text="Amount" />
+         <TableColumn fx:id="colTotal" editable="false" prefWidth="99.0" resizable="false" text="Total Price (SEK)" />
+         <TableColumn fx:id="colMinus" prefWidth="43.0" />
+         <TableColumn fx:id="colPlus" prefWidth="45.0" />
       </columns>
       <effect>
          <DropShadow />
@@ -57,4 +63,9 @@
       </font>
    </Label>
    <Button layoutX="900.0" layoutY="61.0" mnemonicParsing="false" onAction="#goToShop" prefHeight="11.0" prefWidth="70.0" style="-fx-background-color: #EA0077;" text="Go Back" textFill="#0b0180" />
+   <ImageView fitHeight="47.0" fitWidth="52.0" layoutX="274.0" layoutY="38.0" onMouseClicked="#openPrinterDialog" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../Resources/Printer Icon.png" />
+      </image>
+   </ImageView>
 </AnchorPane>

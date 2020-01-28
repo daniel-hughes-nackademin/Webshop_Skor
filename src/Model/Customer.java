@@ -9,8 +9,8 @@ public class Customer {
     private String email;
     private City city;
 
-    Map<Integer, Order> orders = new HashMap<>();
-    Map<Integer, Review> reviews = new HashMap<>();
+    private Map<Integer, Order> orders = new HashMap<>();
+    private Map<Integer, Review> reviews = new HashMap<>();
 
 
     public Customer(String firstName, String lastName, String email, City city) {
