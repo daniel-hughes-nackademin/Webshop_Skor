@@ -217,7 +217,7 @@ public class Repository {
             if (columnExists(resultSet, "ERROR")) {
                 Program.viewMessage(resultSet.getString("ERROR"), "ERROR", Alert.AlertType.WARNING);
             } else if (columnExists(resultSet, "current_order_id")){
-                Program.currentOrderID = resultSet.getInt(1);
+                Program.currentOrderID = resultSet.getInt(1); //Update currentOrderId
             }
             else {
                 System.out.println("Updated order");
@@ -235,6 +235,7 @@ public class Repository {
 
         return isAddedToCart;
     }
+
 
     public static Order getCurrentOrderFromDB() {
         HashMap<Integer, OrderItem> orderItems = new HashMap<>();
