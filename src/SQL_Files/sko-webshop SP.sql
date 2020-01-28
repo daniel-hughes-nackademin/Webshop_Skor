@@ -77,7 +77,7 @@ ELSEIF NOT shoe_exists(input_shoe_id) THEN
 ELSEIF NOT rating_exists(input_rating_id) THEN
 	SELECT 'Rating does not exist in the database' AS ERROR;
 ELSE
-	INSERT INTO review (customer_id, shoe_id, rating_id, comment) VALUES (input_customer_id, input_shoe_id, input_rating_id, input_comment);
+	INSERT INTO review (customer_id, shoe_id, rating_id, comment, review_date) VALUES (input_customer_id, input_shoe_id, input_rating_id, input_comment, CURRENT_DATE());
 END IF;
 
 COMMIT;
