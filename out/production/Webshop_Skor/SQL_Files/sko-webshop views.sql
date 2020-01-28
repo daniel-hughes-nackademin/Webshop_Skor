@@ -43,3 +43,4 @@ FROM
 lt_shoe_category lt
 JOIN category c USING(category_id)
 JOIN shoe s USING(shoe_id);
+

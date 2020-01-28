@@ -16,14 +16,11 @@
           <TableColumn fx:id="colBrand" editable="false" prefWidth="128.0" resizable="false" text="Brand" />
           <TableColumn fx:id="colModel" editable="false" prefWidth="204.0" resizable="false" text="Model" />
          <TableColumn fx:id="colColor" editable="false" minWidth="0.0" prefWidth="82.0" resizable="false" text="Color" />
-          <TableColumn fx:id="colEU" editable="false" prefWidth="36.0" resizable="false" text="EU" />
-         <TableColumn fx:id="colUK" editable="false" prefWidth="43.0" resizable="false" text="UK" />
-         <TableColumn fx:id="colUSM" editable="false" prefWidth="64.0" resizable="false" text="US Male" />
-         <TableColumn fx:id="colUSF" editable="false" prefWidth="67.0" resizable="false" text="US Female" />
-         <TableColumn fx:id="colJP" editable="false" prefWidth="53.0" resizable="false" text="JP" />
-         <TableColumn fx:id="colPrice" editable="false" prefWidth="67.0" resizable="false" text="Price (SEK)" />
-         <TableColumn fx:id="colAction" editable="false" prefWidth="109.0" resizable="false" text="Action" />
-         <TableColumn fx:id="colStock" editable="false" prefWidth="54.0" resizable="false" text="In Stock" />
+          <TableColumn fx:id="colEU" editable="false" prefWidth="36.0" resizable="false" text="Size" />
+         <TableColumn fx:id="colCategories" editable="false" prefWidth="185.0" resizable="false" text="Categories" />
+         <TableColumn fx:id="colPrice" editable="false" prefWidth="77.0" resizable="false" text="Price (SEK)" />
+         <TableColumn fx:id="colAction" editable="false" prefWidth="84.0" resizable="false" text="Action" />
+         <TableColumn fx:id="colStock" editable="false" prefWidth="58.0" resizable="false" text="In Stock" />
       </columns>
       <effect>
          <DropShadow />
@@ -36,15 +33,14 @@
         </font>
     </Label>
     <Button layoutX="43.0" layoutY="56.0" mnemonicParsing="false" onAction="#goToProfileSettings" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: #EA0077;" text="Profile Settings" textFill="#0b0180" />
-   <ImageView fitHeight="70.0" fitWidth="96.0" layoutX="740.0" layoutY="26.0" onMouseClicked="#goToCheckout" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../Resources/Shopping Cart Icon.jpg" />
-      </image></ImageView>
+    <ImageView fitHeight="70.0" fitWidth="96.0" layoutX="740.0" layoutY="26.0" onMouseClicked="#goToCheckout" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../Resources/Shopping Cart Icon.jpg" />
+    </ImageView>
    <Label fx:id="nrOfItemsInCartLabel" alignment="CENTER" layoutX="740.0" layoutY="7.0" prefHeight="25.0" prefWidth="37.0" text="0" textFill="#053683">
       <font>
          <Font size="17.0" />
       </font></Label>
-   <Label layoutX="846.0" layoutY="42.0" onMouseClicked="#goToCheckout" prefHeight="17.0" prefWidth="115.0" text="Checkout" textFill="#0e11a4" underline="true">
+   <Label layoutX="846.0" layoutY="42.0" onMouseClicked="#goToCheckout" prefHeight="20.0" prefWidth="77.0" text="Go to Cart" textFill="#0e11a4" underline="true">
       <font>
          <Font size="14.0" />
       </font>

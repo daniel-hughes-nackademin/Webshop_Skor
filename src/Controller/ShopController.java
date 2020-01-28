@@ -4,7 +4,6 @@ import Model.Shoe;
 import Program.Program;
 import Utility.Repository;
 import Utility.ViewManager;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -14,10 +13,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
-
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class ShopController {
     @FXML
@@ -34,13 +31,7 @@ public class ShopController {
     @FXML
     private TableColumn<Shoe, Integer> colEU;
     @FXML
-    private TableColumn<Shoe, Double> colUK;
-    @FXML
-    private TableColumn<Shoe, Double> colUSM;
-    @FXML
-    private TableColumn<Shoe, Double> colUSF;
-    @FXML
-    private TableColumn<Shoe, Double> colJP;
+    private TableColumn<Shoe, String> colCategories;
     @FXML
     private TableColumn<Shoe, Integer> colPrice;
     @FXML
@@ -56,33 +47,25 @@ public class ShopController {
 
     public void initialize(){
         customerNameLabel.setText(Program.customer.getFirstName() + " " + Program.customer.getLastName());
-
-        shoes = Repository.getShoesFromDB();
-        shoes.forEach((id, shoe) -> System.out.println("Sko id " + id + ": " + shoe + "\n"));
+        nrOfItemsInCartLabel.setText(String.valueOf(Program.nrOfItemsInCart));
 
         populateTableView();
-
     }
 
     private void populateTableView() {
-
-        ObservableList<Shoe> shoeTableContentList = FXCollections.observableArrayList();
-        shoes.forEach((id, shoe) -> shoeTableContentList.add(shoe));
+        ObservableList<Shoe> shoeTableContentList = getObservableShoeListFromDB();
 
         colBrand.setCellValueFactory(shoe -> new SimpleStringProperty(shoe.getValue().getBrand().getBrand()));
         colModel.setCellValueFactory(shoe -> new SimpleStringProperty(shoe.getValue().getModel().getModel()));
         colColor.setCellValueFactory(shoe -> new SimpleStringProperty(shoe.getValue().getColor()));
         colEU.setCellValueFactory(shoe -> new SimpleIntegerProperty(shoe.getValue().getSize().getEu()).asObject());
-        colUK.setCellValueFactory(shoe -> new SimpleDoubleProperty(shoe.getValue().getSize().getUk()).asObject());
-        colUSM.setCellValueFactory(shoe -> new SimpleDoubleProperty(shoe.getValue().getSize().getUsMale()).asObject());
-        colUSF.setCellValueFactory(shoe -> new SimpleDoubleProperty(shoe.getValue().getSize().getUsFemale()).asObject());
-        colJP.setCellValueFactory(shoe -> new SimpleDoubleProperty(shoe.getValue().getSize().getJapan()).asObject());
+        colCategories.setCellValueFactory(shoe -> new SimpleStringProperty(shoe.getValue().getConcatenatedCategories()));
         colPrice.setCellValueFactory(shoe -> new SimpleIntegerProperty(shoe.getValue().getPrice()).asObject());
         colStock.setCellValueFactory(shoe -> new SimpleIntegerProperty(shoe.getValue().getStockQuantity()).asObject());
 
         //Making a cell factory to insert add to cart button
         Callback<TableColumn<Shoe, String>, TableCell<Shoe, String>> cellFactory
-                = //
+                =
                 new Callback<>() {
                     @Override
                     public TableCell call(final TableColumn<Shoe, String> param) {
@@ -117,6 +100,14 @@ public class ShopController {
 
     }
 
+    private ObservableList<Shoe> getObservableShoeListFromDB() {
+        shoes = Repository.getShoesFromDB();
+        ObservableList<Shoe> shoeTableContentList = FXCollections.observableArrayList();
+        shoes.entrySet().stream().filter(shoeEntry -> shoeEntry.getValue().getStockQuantity() > 0).forEach(shoeEntry -> shoeTableContentList.add(shoeEntry.getValue()));
+
+        return shoeTableContentList;
+    }
+
     private void addToCart(Shoe shoe) {
 
         int shoeId = shoes.entrySet().stream()
@@ -127,21 +118,20 @@ public class ShopController {
 
 
         if(Repository.addToCart(shoeId)){
-            viewMessage("Selected shoe added to cart", "Happy Shopping!", Alert.AlertType.INFORMATION);
+            Program.viewMessage("Selected shoe added to cart", "Happy Shopping!", Alert.AlertType.INFORMATION);
             Program.nrOfItemsInCart++;
             nrOfItemsInCartLabel.setText(Integer.toString(Program.nrOfItemsInCart));
+
+            //Refreshes the table view
+            ObservableList<Shoe> shoeTableContentList = getObservableShoeListFromDB();
+            shoeDisplay.setItems(shoeTableContentList);
+            shoeDisplay.refresh();
+
             System.out.println("Order ID: " + Program.currentOrderID);
         }
 
 
 
-    }
-
-    public static void viewMessage(String message, String title, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setContentText(message);
-        alert.setTitle(title);
-        alert.show();
     }
 
 
@@ -151,7 +141,10 @@ public class ShopController {
 
     @FXML
     private void goToCheckout(MouseEvent mouseEvent) {
-        ViewManager.changeScene(ViewManager.View.CHECKOUT);
+        if(Program.currentOrderID != 0)
+            ViewManager.changeScene(ViewManager.View.CART);
+        else
+            Program.viewMessage("Your cart is empty", "Don't be so stingy. Buy a few pairs", Alert.AlertType.INFORMATION);
     }
 
     @FXML
